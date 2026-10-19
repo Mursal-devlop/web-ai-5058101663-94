@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeowPaws - Perlengkapan & Aksesoris Kucing Terlengkap</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316', // orange-500
+                        primaryDark: '#ea580c', // orange-600
+                        primaryLight: '#ffedd5', // orange-100
+                        secondary: '#0d9488', // teal-600
+                        dark: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-primary text-white text-xs sm:text-sm py-2 px-4 text-center font-medium">
+        <span>🎉 Promo Spesial Gajian! Gratis Ongkir Min. Belanja Rp 100.000 dengan kode: <strong class="underline cursor-pointer">MEOWHEMAT</strong></span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3">
+                    <span class="w-11 h-11 bg-primary text-white flex items-center justify-center rounded-2xl shadow-md shadow-orange-300">
+                        <i class="fa-solid fa-cat text-2xl"></i>
+                    </span>
+                    <div>
+                        <span class="text-2xl font-black tracking-tight text-slate-900">Meow<span class="text-primary">Paws</span></span>
+                        <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-widest -mt-1">Pet Supplies</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#beranda" class="hover:text-primary transition-colors">Beranda</a>
+                    <a href="#kategori" class="hover:text-primary transition-colors">Kategori</a>
+                    <a href="#produk" class="hover:text-primary transition-colors">Produk Populer</a>
+                    <a href="#promo" class="hover:text-primary transition-colors">Promo Spesial</a>
+                    <a href="#testimoni" class="hover:text-primary transition-colors">Testimoni</a>
+                </nav>
+
+                <!-- Search and Cart Button -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- Search Input (Desktop) -->
+                    <div class="relative hidden lg:block w-64">
+                        <input type="text" id="searchInput" placeholder="Cari perlengkapan kucing..." class="w-full pl-9 pr-4 py-2 text-xs rounded-full bg-slate-100 border border-transparent focus:bg-white focus:border-primary focus:outline-none transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartModal(true)" class="relative p-2.5 bg-slate-100 hover:bg-primaryLight text-slate-700 hover:text-primary rounded-xl transition-all">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-primary text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600 hover:text-primary">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
+            <input type="text" placeholder="Cari perlengkapan kucing..." class="w-full px-4 py-2 text-sm rounded-lg bg-slate-100 border border-slate-200 mb-2">
+            <a href="#beranda" class="block py-2 text-slate-700 font-medium hover:text-primary">Beranda</a>
+            <a href="#kategori" class="block py-2 text-slate-700 font-medium hover:text-primary">Kategori</a>
+            <a href="#produk" class="block py-2 text-slate-700 font-medium hover:text-primary">Produk Populer</a>
+            <a href="#promo" class="block py-2 text-slate-700 font-medium hover:text-primary">Promo Spesial</a>
+            <a href="#testimoni" class="block py-2 text-slate-700 font-medium hover:text-primary">Testimoni</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="beranda" class="relative overflow-hidden bg-gradient-to-b from-orange-50/70 via-white to-slate-50 py-12 md:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100 text-primary text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-shield-cat"></i> 100% Produk Original & Aman
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15]">
+                            Kenyamanan Maksimal Untuk <span class="text-primary underline decoration-orange-300 decoration-wavy decoration-2">Anabul Kesayangan</span>
+                        </h1>
+                        <p class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
+                            Temukan aneka kebutuhan kucing terbaik mulai dari kandang nyaman, tempat tidur empuk, mainan aktif, hingga perlengkapan grooming higienis.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#produk" class="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 transition transform hover:-translate-y-0.5 text-center">
+                                Belanja Sekarang <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="#kategori" class="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold rounded-xl transition text-center shadow-sm">
+                                Jelajahi Kategori
+                            </a>
+                        </div>
+                        <!-- Features Icons -->
+                        <div class="pt-6 border-t border-slate-200/60 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <p class="text-xl sm:text-2xl font-bold text-slate-800">10k+</p>
+                                <p class="text-xs text-slate-500 font-medium">Pelanggan Puas</p>
+                            </div>
+                            <div>
+                                <p class="text-xl sm:text-2xl font-bold text-slate-800">500+</p>
+                                <p class="text-xs text-slate-500 font-medium">Pilihan Produk</p>
+                            </div>
+                            <div>
+                                <p class="text-xl sm:text-2xl font-bold text-slate-800">24 Jam</p>
+                                <p class="text-xs text-slate-500 font-medium">Pengiriman Cepat</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <div class="absolute -top-6 -left-6 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"></div>
+                            <div class="absolute -bottom-8 -right-6 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                            <div class="relative bg-white p-3 rounded-3xl shadow-2xl border border-slate-100">
+                                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80" alt="Kucing Lucu Bersantai" class="w-full h-[400px] object-cover rounded-2xl">
+                                <!-- Float badge -->
+                                <div class="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-box-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400 font-medium">Garansi Mutu</p>
+                                        <p class="text-sm font-bold text-slate-800">Material Aman & Tahan Lama</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section id="kategori" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-primary mb-2">Kategori Pilihan</h2>
+                    <p class="text-3xl font-extrabold text-slate-900">Semua yang Dibutuhkan Si Manja</p>
+                    <p class="text-slate-500 text-sm mt-2">Pilih kategori perlengkapan yang ingin kamu cari</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+                    <!-- Cat 1 -->
+                    <button onclick="filterByCategory('kandang')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-house-chimney-window"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Kandang & Kasur</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">24 Produk</p>
+                    </button>
+                    <!-- Cat 2 -->
+                    <button onclick="filterByCategory('litter')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-toilet"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Litter Box & Pasir</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">18 Produk</p>
+                    </button>
+                    <!-- Cat 3 -->
+                    <button onclick="filterByCategory('mainan')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-baseball-ball"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Mainan Kucing</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">32 Produk</p>
+                    </button>
+                    <!-- Cat 4 -->
+                    <button onclick="filterByCategory('makan')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Wadah & Feeder</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">15 Produk</p>
+                    </button>
+                    <!-- Cat 5 -->
+                    <button onclick="filterByCategory('grooming')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-pump-soap"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Grooming & Sisir</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">29 Produk</p>
+                    </button>
+                    <!-- Cat 6 -->
+                    <button onclick="filterByCategory('carrier')" class="group p-5 bg-slate-50 hover:bg-orange-50 rounded-2xl border border-slate-100 hover:border-orange-200 text-center transition-all duration-300">
+                        <div class="w-14 h-14 mx-auto mb-3 bg-white group-hover:bg-primary text-primary group-hover:text-white rounded-xl flex items-center justify-center text-2xl shadow-sm transition-all">
+                            <i class="fa-solid fa-suitcase-rolling"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors">Tas & Carrier</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">12 Produk</p>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Section -->
+        <section id="produk" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-primary mb-2">Katalog Rekomendasi</h2>
+                        <h3 class="text-3xl font-extrabold text-slate-900">Peralatan Paling Diminati</h3>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="filterByCategory('all')" class="cat-pill active-pill px-4 py-2 text-xs font-semibold rounded-full bg-primary text-white transition-all shadow-sm">Semua</button>
+                        <button onclick="filterByCategory('kandang')" class="cat-pill px-4 py-2 text-xs font-semibold rounded-full bg-white text-slate-600 border border-slate-200 hover:border-primary transition-all">Kandang/Kasur</button>
+                        <button onclick="filterByCategory('litter')" class="cat-pill px-4 py-2 text-xs font-semibold rounded-full bg-white text-slate-600 border border-slate-200 hover:border-primary transition-all">Litter Box</button>
+                        <button onclick="filterByCategory('mainan')" class="cat-pill px-4 py-2 text-xs font-semibold rounded-full bg-white text-slate-600 border border-slate-200 hover:border-primary transition-all">Mainan</button>
+                        <button onclick="filterByCategory('makan')" class="cat-pill px-4 py-2 text-xs font-semibold rounded-full bg-white text-slate-600 border border-slate-200 hover:border-primary transition-all">Dispenser Air/Makan</button>
+                    </div>
+                </div>
+
+                <!-- Products Container -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Products will be generated dynamically by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Banner Promo -->
+        <section id="promo" class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-xl">
+                    <div class="absolute -right-10 -bottom-10 w-80 h-80 rounded-full bg-white/10 blur-xl"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12">
+                        <div class="md:col-span-7 space-y-4">
+                            <span class="inline-block bg-white/20 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                                Flash Sale Pekan Ini
+                            </span>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+                                Diskon s/d 40% Untuk Cat Tree & Cakaran Kucing Mewah
+                            </h3>
+                            <p class="text-orange-100 text-sm sm:text-base max-w-lg">
+                                Lindungi sofa kesayanganmu dari cakaran anabul! Berikan Cat Tree kokoh dengan tali rami alami ramah lingkungan.
+                            </p>
+                            <div class="pt-2 flex items-center gap-4">
+                                <a href="#produk" class="px-6 py-3 bg-white text-orange-600 font-bold rounded-xl shadow hover:bg-orange-50 transition">
+                                    Klaim Diskon Sekarang
+                                </a>
+                                <div class="text-xs text-orange-100">
+                                    <span class="font-bold text-white block text-sm">Berakhir Dalam:</span>
+                                    <span id="countdown">23 Jam : 45 Menit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:col-span-5 flex justify-center">
+                            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&q=80" alt="Cat Tree Promo" class="rounded-2xl shadow-2xl max-h-72 w-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Value Proposition -->
+        <section class="py-14 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-orange-100 text-primary flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base">Pengiriman Cepat</h4>
+                            <p class="text-xs text-slate-500 mt-1">Pesanan diproses & dikirim di hari yang sama ke seluruh Indonesia.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 text-secondary flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base">Garansi Kualitas</h4>
+                            <p class="text-xs text-slate-500 mt-1">Barang rusak saat diterima? Kami tukar baru 100% tanpa ribet.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-paw"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base">Aman Buat Kucing</h4>
+                            <p class="text-xs text-slate-500 mt-1">Bebas racun, bahan BPA-Free, dan didesain ergonomis untuk anabul.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base">Layanan 24/7</h4>
+                            <p class="text-xs text-slate-500 mt-1">Konsultasikan kebutuhan hewan peliharaanmu kapan saja.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimoni" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-primary mb-2">Testimoni Pelanggan</h2>
+                    <p class="text-3xl font-extrabold text-slate-900">Kata Para Cat Parents</p>
+                    <p class="text-slate-500 text-sm mt-2">Kepuasan majikan berbulu adalah misi utama kami</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testi 1 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-sm text-slate-600 italic">"Cat Tree-nya kokoh banget! Kucing Persia saya yang gendut 6kg lompat-lompat ga goyang sama sekali. Packing juga sangat aman memakai bubble wrap tebal."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="User">
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">Dian Safitri</p>
+                                <p class="text-[11px] text-slate-400">Owner Mochi (Persia)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testi 2 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-sm text-slate-600 italic">"Water fountain-nya hening banget suaranya, bikin kucing saya yang awalnya jarang minum sekarang jadi rajin bolak-balik minum. Recommended seller!"</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="User">
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">Rian Pratama</p>
+                                <p class="text-[11px] text-slate-400">Owner Milo & Chiki (British Shorthair)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testi 3 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <p class="text-sm text-slate-600 italic">"Litter box tertutup anti baunya manjur pol. Pasir ga berceceran lagi di lantai kamar. Pengiriman super kilat, pesan kemarin hari ini udah sampai."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6 pt-4 border-t border-slate-200">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 rounded-full object-cover" alt="User">
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">Amanda Putri</p>
+                                <p class="text-[11px] text-slate-400">Owner Oreo (Domestic)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-12 bg-slate-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-primary">Komunitas Pecinta Kucing</span>
+                <h3 class="text-2xl sm:text-3xl font-bold">Dapatkan Voucher Diskon 15% Untuk Pembelian Pertama</h3>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">Daftarkan email kamu untuk tips merawat kucing dan kabar diskon flash sale setiap minggu.</p>
+                <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto pt-2">
+                    <input type="email" required placeholder="Masukkan email kamu..." class="w-full sm:w-auto flex-1 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white focus:outline-none focus:border-primary">
+                    <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primaryDark font-bold text-sm rounded-xl transition">Berlangganan</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 pt-12 pb-6 text-sm text-slate-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                <!-- Col 1 -->
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <span class="w-9 h-9 bg-primary text-white flex items-center justify-center rounded-xl">
+                            <i class="fa-solid fa-cat text-xl"></i>
+                        </span>
+                        <span class="text-xl font-black text-slate-900">Meow<span class="text-primary">Paws</span></span>
+                    </a>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-sm">
+                        Penyedia perlengkapan, mainan, tempat tidur, serta fasilitas terbaik untuk kesejahteraan dan kenyamanan kucing peliharaan di rumah Anda.
+                    </p>
+                    <div class="flex items-center gap-3 text-slate-400 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-4 text-xs uppercase tracking-wider">Kategori Produk</h5>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="#kategori" class="hover:text-primary transition">Kandang & Rumah Kucing</a></li>
+                        <li><a href="#kategori" class="hover:text-primary transition">Litter Box & Pasir Wangi</a></li>
+                        <li><a href="#kategori" class="hover:text-primary transition">Mainan & Scratching Post</a></li>
+                        <li><a href="#kategori" class="hover:text-primary transition">Dispenser Makanan & Air</a></li>
+                        <li><a href="#kategori" class="hover:text-primary transition">Peralatan Grooming & Sisir</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-4 text-xs uppercase tracking-wider">Bantuan Pelanggan</h5>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="#" class="hover:text-primary transition">Konfirmasi Pembayaran</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Lacak Pengiriman</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Syarat & Ketentuan Retur</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Panduan Ukuran Kandang</a></li>
+                        <li><a href="#" class="hover:text-primary transition">FAQ (Pertanyaan Umum)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-4 text-xs uppercase tracking-wider">Hubungi Kami</h5>
+                    <ul class="space-y-2.5 text-xs text-slate-500">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-primary"></i>
+                            <span>Jl. Kucing Bahagia No. 88, Jakarta Selatan</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>+62 812-3456-7890</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>halo@meowpaws.id</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Note -->
+            <div class="border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                <p>&copy; 2025 MeowPaws Indonesia. Hak Cipta Dilindungi.</p>
+                <div class="flex items-center gap-4">
+                    <span>Metode Pembayaran:</span>
+                    <span class="font-bold text-slate-600">BCA / Mandiri / QRIS / GoPay / ShopeePay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Slide-Over / Modal -->
+    <div id="cartModal" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCartModal(false)" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-primary text-xl"></i>
+                        <h3 class="text-base font-bold text-slate-800">Keranjang Belanja</h3>
+                    </div>
+                    <button onclick="toggleCartModal(false)" class="p-2 text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Item List -->
+                <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Cart Footer -->
+                <div class="p-5 border-t border-slate-100 bg-slate-50 space-y-3">
+                    <div class="flex justify-between items-center text-sm font-semibold">
+                        <span class="text-slate-600">Subtotal</span>
+                        <span id="cartTotalPrice" class="text-lg font-bold text-slate-900">Rp 0</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">*Ongkir dan voucher dihitung saat checkout.</p>
+                    <button onclick="handleCheckout()" class="w-full py-3.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-orange-500/20 transition">
+                        Lanjut ke Pembayaran <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                    <button onclick="toggleCartModal(false)" class="w-full py-2.5 text-xs text-slate-500 font-semibold hover:text-slate-800 text-center">
+                        Lanjut Belanja Dulu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg" class="text-sm font-medium">Item berhasil ditambahkan!</span>
+    </div>
+
+    <!-- JavaScript Data and Logic -->
+    <script>
+        // Sample Products Database
+        const products = [
+            {
+                id: 1,
+                name: "Cat Tree Menara 4 Tingkat Sisal Rope",
+                category: "kandang",
+                price: 385000,
+                rating: 4.9,
+                sold: 420,
+                image: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=500&q=80",
+                badge: "Terlaris"
+            },
+            {
+                id: 2,
+                name: "Smart Water Fountain Otomatis 2.5L",
+                category: "makan",
+                price: 139000,
+                rating: 4.8,
+                sold: 810,
+                image: "https://images.unsplash.com/photo-1571566882372-1598d88abd90?auto=format&fit=crop&w=500&q=80",
+                badge: "Diskon 25%"
+            },
+            {
+                id: 3,
+                name: "Litter Box Semi Tertutup + Sekop Pasir",
+                category: "litter",
+                price: 98000,
+                rating: 4.7,
+                sold: 350,
+                image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80",
+                badge: "Pilihan Majikan"
+            },
+            {
+                id: 4,
+                name: "Tempat Tidur Donat Bulu Halus Hangat",
+                category: "kandang",
+                price: 79000,
+                rating: 4.9,
+                sold: 1200,
+                image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=500&q=80",
+                badge: "Super Empuk"
+            },
+            {
+                id: 5,
+                name: "Mainan Laser Otomatis & Tongkat Bulu",
+                category: "mainan",
+                price: 49000,
+                rating: 4.6,
+                sold: 630,
+                image: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=500&q=80",
+                badge: "Best Value"
+            },
+            {
+                id: 6,
+                name: "Tas Carrier Astronot Kapsul Transparan",
+                category: "carrier",
+                price: 155000,
+                rating: 4.8,
+                sold: 520,
+                image: "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=500&q=80",
+                badge: "Travel Ready"
+            },
+            {
+                id: 7,
+                name: "Sisir Kutu Grooming Praktis Push & Clean",
+                category: "grooming",
+                price: 35000,
+                rating: 4.7,
+                sold: 990,
+                image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=500&q=80",
+                badge: "Praktis"
+            },
+            {
+                id: 8,
+                name: "Mangkuk Ganda Ergonomis Kemiringan 15°",
+                category: "makan",
+                price: 59000,
+                rating: 4.8,
+                sold: 410,
+                image: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=500&q=80",
+                badge: "Anti Muntah"
+            }
+        ];
+
+        // Cart State
+        let cart = [];
+
+        // Format Currency Helper
+        function formatRupiah(num) {
+            return 'Rp ' + Number(num).toLocaleString('id-ID');
+        }
+
+        // Render Products
+        function renderProducts(items) {
+            const container = document.getElementById('productGrid');
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-3"></i>
+                        <p class="text-slate-500 font-medium">Tidak ada produk ditemukan.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map(p => `
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="relative overflow-hidden bg-slate-100">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-sm">
+                            ${p.badge}
+                        </span>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-2">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-slate-700 ml-0.5">${p.rating}</span>
+                                <span class="text-slate-400 font-normal">(${p.sold} terjual)</span>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm leading-snug hover:text-primary transition line-clamp-2">
+                                ${p.name}
+                            </h4>
+                        </div>
+
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block font-medium">Harga</span>
+                                <span class="text-base font-extrabold text-primary">${formatRupiah(p.price)}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="p-2.5 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 rounded-xl transition-colors shadow-sm" title="Tambah ke keranjang">
+                                <i class="fa-solid fa-cart-plus text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Logic
+        function filterByCategory(category) {
+            // Update Pill classes
+            const pills = document.querySelectorAll('.cat-pill');
+            pills.forEach(p => {
+                p.classList.remove('bg-primary', 'text-white', 'active-pill');
+                p.classList.add('bg-white', 'text-slate-600');
+            });
+
+            // Mark current active button
+            event?.target?.classList?.add('bg-primary', 'text-white', 'active-pill');
+            event?.target?.classList?.remove('bg-white', 'text-slate-600');
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`"${product.name.slice(0, 20)}..." masuk keranjang!`);
+        }
+
+        function updateCartQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            // Counter Badge
+            const totalCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+            document.getElementById('cartCount').innerText = totalCount;
+
+            // List Items
+            const list = document.getElementById('cartItemsList');
+            const totalElement = document.getElementById('cartTotalPrice');
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-cart-arrow-down text-5xl mb-3 text-slate-300"></i>
+                        <p class="font-medium text-sm text-slate-500">Keranjang masih kosong</p>
+                        <p class="text-xs">Yuk isi dengan perlengkapan anabulmu!</p>
+                    </div>
+                `;
+                totalElement.innerText = formatRupiah(0);
+                return;
+            }
+
+            let subtotal = 0;
+            list.innerHTML = cart.map(item => {
+                subtotal += item.price * item.quantity;
+                return `
+                    <div class="flex gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-100 items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h5 class="text-xs font-bold text-slate-800 truncate">${item.name}</h5>
+                            <p class="text-xs text-primary font-bold mt-0.5">${formatRupiah(item.price)}</p>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateCartQuantity(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center hover:bg-slate-100 text-xs">-</button>
+                                <span class="text-xs font-semibold px-1 text-slate-700">${item.quantity}</span>
+                                <button onclick="updateCartQuantity(${item.id}, 1)" class="w-6 h-6 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center hover:bg-slate-100 text-xs">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 p-2">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            totalElement.innerText = formatRupiah(subtotal);
+        }
+
+        // Modal Helpers
+        function toggleCartModal(show) {
+            const modal = document.getElementById('cartModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        // Toast Feedback
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            msgEl.innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2500);
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong! Silakan pilih perlengkapan kucing terlebih dahulu.");
+                return;
+            }
+            alert("Terima kasih! Pesanan kamu sedang dialihkan ke sistem pembayaran MeowPaws.");
+            cart = [];
+            updateCartUI();
+            toggleCartModal(false);
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast("Kode voucher 15% telah dikirim ke email kamu!");
+            e.target.reset();
+        }
+
+        // Simple Live Search
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            renderProducts(filtered);
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
